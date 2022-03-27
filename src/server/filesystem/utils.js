@@ -115,7 +115,7 @@ const throttlePromises = (maxPending, asyncFuncs) => {
               if (numPending == 0) resolve(promisedValues); // All promises fulfilled
               return;
           }
-          while (numPending < maxPending) { // Room for creating promise(s)
+          while (numPending < maxPending && nextFuncId < asyncFuncs.length) { // Room for creating promise(s)
               numPending++;
               const thisFuncId = nextFuncId++;
               asyncFuncs[thisFuncId]().then(value => {
